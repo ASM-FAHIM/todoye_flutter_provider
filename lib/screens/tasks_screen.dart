@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todoye_provider/screens/add_task_screen.dart';
+
+import '../widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
   const TasksScreen({Key? key}) : super(key: key);
@@ -9,8 +12,12 @@ class TasksScreen extends StatelessWidget {
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
-        onPressed: () {},
-        child: Icon(
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) => const AddTaskScreen());
+        },
+        child: const Icon(
           Icons.add,
           size: 40,
         ),
@@ -23,7 +30,7 @@ class TasksScreen extends StatelessWidget {
                 const EdgeInsets.only(top: 60, bottom: 30, left: 30, right: 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.white,
@@ -52,21 +59,15 @@ class TasksScreen extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
+              padding: EdgeInsets.only(left: 20),
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),
                 ),
               ),
-              child: ListView(
-                children: [
-                  ListTile(
-                    title: Text("This is a task"),
-                    trailing: Checkbox(value: false, onChanged: (value) {}),
-                  )
-                ],
-              ),
+              child: TaskListView(),
             ),
           )
         ],
